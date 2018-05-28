@@ -22,13 +22,12 @@ def dialog(name=None):
             continue
 
         if answer.text.startswith('/get'):
-            picture = next(image)
-            # try:
-            #     pass
-            # except Exception as e:
-            #     print(e)
-            #     image = Image()
-            #     picture = next(image)
+            try:
+                picture = next(image)
+            except Exception as e:
+                print(e)
+                image = Image()
+                picture = next(image)
             update = yield picture
             answer = update.message
             continue
@@ -41,8 +40,14 @@ def dialog(name=None):
 def Image():
     count = 2
     for i in range(count):
-        with open(str('Images/' + str(i) + '.jpg')) as im:
-            pic = im.read()
+        try:
+            with open(str('Images/' + str(i) + '.jpg')) as im:
+                try:
+                    pic = im.read()
+                except Exception as e:
+                    print(1, e)
+        except Exception as e:
+            print(2, e)
         # print(pic)
         yield PhotoMessage(photo=pic)
 
