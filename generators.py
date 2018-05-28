@@ -41,6 +41,7 @@ def Image():
     for i in range(count):
         with open(str(i + '.jpg')) as im:
             pic = im.read()
+        print(pic)
         yield PhotoMessage(photo=pic)
 
 def bad_bot(name='Никита'):
