@@ -24,7 +24,8 @@ def dialog(name=None):
         if answer.text.startswith('/get'):
             try:
                 picture = next(image)
-            except:
+            except Exception as e:
+                print(e)
                 image = Image()
                 picture = next(image)
             update = yield picture
