@@ -1,5 +1,5 @@
 from Message import Message, PhotoMessage
-
+from PIL import Image
 
 def dialog(name=None):
     if name is not None:
@@ -13,7 +13,7 @@ def dialog(name=None):
         answer = update.message
         name = answer.text.rstrip(".!").capitalize()
     update = yield Message('gwrgwergv')
-    image = Image()
+    image = MyImage()
     answer = update.message
     while True:
         if answer.text.startswith('/help'):
@@ -26,7 +26,7 @@ def dialog(name=None):
                 picture = next(image)
             except Exception as e:
                 print(e)
-                image = Image()
+                image = MyImage()
                 picture = next(image)
             update = yield picture
             answer = update.message
@@ -37,18 +37,19 @@ def dialog(name=None):
         answer = update.message
 
 
-def Image():
+def MyImage():
     count = 2
     for i in range(count):
-        try:
-            with open(str('Images/' + str(i) + '.jpg')) as im:
-                try:
-                    pic = im.read()
-                except Exception as e:
-                    print(1, e)
-        except Exception as e:
-            print(2, e)
-        # print(pic)
+        pic = Image.open(str('Images/' + str(i) + '.jpg'))
+        # try:
+        #     with open(str('Images/' + str(i) + '.jpg')) as im:
+        #         try:
+        #             pic = im.read()
+        #         except Exception as e:
+        #             print(1, e)
+        # except Exception as e:
+        #     print(2, e)
+        # # print(pic)
         yield PhotoMessage(photo=pic)
 
 def bad_bot(name='Никита'):
