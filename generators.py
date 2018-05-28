@@ -22,12 +22,13 @@ def dialog(name=None):
             continue
 
         if answer.text.startswith('/get'):
+            print('start get')
             try:
                 picture = next(image)
             except Exception as e:
-                print('error start',e,'error end')
+                print('error start', e, 'error end')
                 picture = Message('произошла какая-то ошибка, сейчас разберёмся)')
-                # image = MyImage()
+                image = MyImage()
                 # picture = next(image)
             update = yield picture
             answer = update.message
