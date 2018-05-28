@@ -39,7 +39,7 @@ def dialog(name=None):
 def Image():
     count = 2
     for i in range(count):
-        with open(str(i + '.jpg')) as im:
+        with open(str('Images/' + str(i) + '.jpg')) as im:
             pic = im.read()
         print(pic)
         yield PhotoMessage(photo=pic)
