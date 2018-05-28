@@ -25,9 +25,10 @@ def dialog(name=None):
             try:
                 picture = next(image)
             except Exception as e:
-                print(e)
-                image = MyImage()
-                picture = next(image)
+                print('error start',e,'error end')
+                picture = Message('произошла какая-то ошибка, сейчас разберёмся)')
+                # image = MyImage()
+                # picture = next(image)
             update = yield picture
             answer = update.message
             continue
