@@ -22,12 +22,13 @@ def dialog(name=None):
             continue
 
         if answer.text.startswith('/get'):
-            try:
-                picture = next(image)
-            except Exception as e:
-                print(e)
-                image = Image()
-                picture = next(image)
+            picture = next(image)
+            # try:
+            #     pass
+            # except Exception as e:
+            #     print(e)
+            #     image = Image()
+            #     picture = next(image)
             update = yield picture
             answer = update.message
             continue
