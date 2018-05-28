@@ -42,7 +42,7 @@ def Image():
     for i in range(count):
         with open(str('Images/' + str(i) + '.jpg')) as im:
             pic = im.read()
-        print(pic)
+        # print(pic)
         yield PhotoMessage(photo=pic)
 
 def bad_bot(name='Никита'):
