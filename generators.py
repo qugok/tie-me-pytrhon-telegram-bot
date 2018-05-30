@@ -42,9 +42,10 @@ def dialog(name=None):
 
 
 def MyImage():
-    count = 2
+    with open('Images/count') as r:
+        count = int(r.read())
     for i in range(count):
-        pic = open(str('Images/' + str(i) + '.jpg'),'rb')
+        pic = open(str('Images/' + str(i) + '.jpg'), 'rb')
         # try:
         #     with open(str('Images/' + str(i) + '.jpg')) as im:
         #         try:
@@ -55,6 +56,8 @@ def MyImage():
         #     print(2, e)
         # # print(pic)
         yield PhotoMessage(photo=pic)
+
+# def addImege(update: T)
 
 def adimin_bot(name=None):
     update = yield Message('gwrgwergv')
