@@ -26,13 +26,15 @@ def dialog(name=None):
             try:
                 picture = next(image)
             except Exception as e:
-                print('error start', e, 'error end')
+                print('error start', e, e.args, 'error end')
                 picture = Message('произошла какая-то ошибка, сейчас разберёмся)')
                 image = MyImage()
                 # picture = next(image)
             update = yield picture
             answer = update.message
             continue
+        if answer.text.startswith('/end'):
+            return update
 
         update = yield Message('Я не понимаю что вы написали(',
                                         'Попробуйте подсказку\nТам всё, что я умею\nВы можете её вызвать командой /help\nУдачи!)')
@@ -42,7 +44,7 @@ def dialog(name=None):
 def MyImage():
     count = 2
     for i in range(count):
-        pic = Image.open(str('Images/' + str(i) + '.jpg'))
+        pic = open(str('Images/' + str(i) + '.jpg'),'rb')
         # try:
         #     with open(str('Images/' + str(i) + '.jpg')) as im:
         #         try:
@@ -54,13 +56,20 @@ def MyImage():
         # # print(pic)
         yield PhotoMessage(photo=pic)
 
-def bad_bot(name='Никита'):
-    """
-    специально для Никиты
-    :return:
-    """
-    count = 0
-    while count < 10:
-        yield Message('Я с тобой не разговариваю!')
-        count += 1
-    yield Message('Тебе не надоело?').make_keyboard([['Да'], ['Нет']])
+def adimin_bot(name=None):
+    update = yield Message('gwrgwergv')
+    answer = update.message
+    while True:
+        if answer.text.startswith('/help'):
+            update = yield Message('gwrgwergv')
+            answer = update.message
+            continue
+
+        if answer.text.startswith('/like user'):
+            update = yield from dialog(name)
+            answer = update.message
+            continue
+
+        update = yield Message('Я не понимаю что вы написали(',
+                                        'Попробуйте подсказку\nТам всё, что я умею\nВы можете её вызвать командой /help\nУдачи!)')
+        answer = update.message
