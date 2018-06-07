@@ -68,7 +68,7 @@ def adimin_bot(name=None):
     answer = update.message
     while True:
         if answer.text.startswith('/help'):
-            update = yield Message('/like_user to use user interface\n/end to end user interface')
+            update = yield Message('/like_user to use user interface\n/end to end user interface\n/show_users to see users')
             answer = update.message
             continue
 

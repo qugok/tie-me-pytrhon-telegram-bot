@@ -32,6 +32,7 @@ class MyBot:
         self.updater.start_polling(clean=True)
         # Останавливаем бота, если были нажаты Ctrl + C
         self.updater.idle()
+        print('start end')
 
     def handle_message(self, bot: telegram.Bot, update: telegram.Update):
         # print(update)
@@ -51,8 +52,12 @@ class MyBot:
                 admin_usernames.remove((update.message.text).split()[-1])
             except:
                 pass
-        if update.message.text == '/show_admins' and user in admin_usernames:
+        if update.message.text == '/show_users' and user in admin_usernames:
             answer = Message(other_users, admin_usernames)
+            answer.send(bot, chat_id)
+            return
+        if update.message.text == '/show_admins' and chat_id == my_id:
+            answer = Message(admin_usernames)
             answer.send(bot, chat_id)
             return
         if update.message.text == '/clear_admins' and int(chat_id) == my_id:
