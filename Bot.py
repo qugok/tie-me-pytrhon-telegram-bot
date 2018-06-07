@@ -36,10 +36,10 @@ class MyBot:
         add_users(*admin_usernames, *other_users)
 
     def handle_message(self, bot: telegram.Bot, update: telegram.Update):
-        # print(update)
+        print(update)
         user = update.message['chat']['username']
         chat_id = int(update.message.chat_id)
-        if user not in admin_usernames or other_users:
+        if user not in admin_usernames and user not in other_users:
             print(user)
             if chat_id == my_id:
                 admin_usernames.append(user)
