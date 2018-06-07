@@ -3,7 +3,7 @@
 
 import my_read
 from MyBot import MyBot
-from generators import dialog,adimin_bot
+from generators import dialog, adimin_bot
 
 
 if __name__ == "__main__":
