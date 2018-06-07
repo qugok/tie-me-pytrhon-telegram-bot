@@ -55,13 +55,13 @@ class MyBot:
                 pass
         if update.message.text == '/show_users' and user in admin_usernames:
             # print('s show')
-            answer = Message(*other_users, *admin_usernames)
+            answer = Message(*other_users, *admin_usernames, prefix='@')
             # print('sending')
             answer.send(bot, chat_id)
             add_users(*admin_usernames, *other_users)
             return
         if update.message.text == '/show_admins' and chat_id == my_id:
-            answer = Message(*admin_usernames)
+            answer = Message(*admin_usernames, prefix='@')
             answer.send(bot, chat_id)
             return
         if update.message.text == '/clear_admins' and int(chat_id) == my_id:

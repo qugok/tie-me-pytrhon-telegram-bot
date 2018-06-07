@@ -23,13 +23,16 @@ class Message:
         self.texts = texts
         if 'reply_markup' not in options:
             options['reply_markup'] = ReplyKeyboardRemove()
+        if 'prefix' in options:
+            self.prefix = options['prefix']
+            options.pop('prefix')
         self.options = options
 
     def send(self, bot: telegram.Bot, chat_id):
         self.prepare()
         for text in self.texts:
             if len(text.strip()) != 0:
-                bot.sendMessage(chat_id=chat_id, text=text, **self.options)
+                bot.sendMessage(chat_id=chat_id, text=self.prefix+text, **self.options)
 
     def add(self, *texts: str):
         return Message(*texts, *self.texts, **self.options)
