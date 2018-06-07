@@ -37,7 +37,7 @@ class MyBot:
         print(update)
         user = update.message['chat']['username']
         print(user)
-        chat_id = str(update.message.chat_id)
+        chat_id = int(update.message.chat_id)
         if user in admin_usernames and user in other_users:
             other_users.remove(user)
             self.handlers.pop(chat_id, None)
@@ -63,7 +63,7 @@ class MyBot:
                 return self.handle_message(bot, update)
         else:
             name = update.message['chat']['first_name']
-            if user in admin_usernames or chat_id == my_id:
+            if user in admin_usernames or int(chat_id) == my_id:
                 self.handlers[chat_id] = self.admin_generator(name)
             else:
                 self.handlers[chat_id] = self.generator(name)
