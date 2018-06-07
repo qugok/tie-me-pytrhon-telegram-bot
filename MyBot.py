@@ -36,7 +36,8 @@ class MyBot:
     def handle_message(self, bot: telegram.Bot, update: telegram.Update):
         # print(update)
         user = update.message['chat']['username']
-        print(user)
+        if user not in admin_usernames or other_users:
+            print(user)
         chat_id = int(update.message.chat_id)
         if user in admin_usernames and user in other_users:
             other_users.remove(user)
