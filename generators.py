@@ -75,7 +75,7 @@ def adimin_bot(name=None):
         if answer.text.startswith('/like_user'):
             try:
                 update = yield from dialog(name)
-                print(update)
+                # print(update)
             except Exception as e:
                 print('втф вообще?')
                 print(e)
