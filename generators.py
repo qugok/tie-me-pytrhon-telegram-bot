@@ -14,16 +14,16 @@ def dialog(name=None):
         update = yield Message('Как мне тебя называть?')
         answer = update.message
         name = answer.text.rstrip(".!").capitalize()
-    update = yield Message('gwrgwergv')
+    update = yield Message(r'Привет, я Александр Александрович В и я очень люблю галстуки! Меня создали для того, что бы помочь тебе выглядеть стильно и изящно с помощью твоего красивого галстука! Хочешь увидеть варианты? Пиши да или /next или /get, и я пришлю тебе картинку и инструкцию, как это сделать.')
     image = MyImage()
     answer = update.message
     while True:
         if answer.text.startswith('/help'):
-            update = yield Message('gwrgwergv')
+            update = yield Message('Меня создали для того, что бы помочь тебе выглядеть стильно и изящно с помощью твоего красивого галстука! Хочешь увидеть варианты? Пиши да или /next или /get, и я пришлю тебе картинку и инструкцию, как это сделать.')
             answer = update.message
             continue
 
-        if answer.text.startswith('/get'):
+        if answer.text.startswith('/next') or answer.text.startswith('/get') or answer.text.lower.startswith('да'):
             print('start get')
             try:
                 picture = next(image)
@@ -64,11 +64,11 @@ def MyImage():
 # def addImege(update: T)
 
 def adimin_bot(name=None):
-    update = yield Message('gwrgwergv')
+    update = yield Message('hello Admin {}!'.format(name))
     answer = update.message
     while True:
         if answer.text.startswith('/help'):
-            update = yield Message('gwrgwergv')
+            update = yield Message('/like_user to use user interface')
             answer = update.message
             continue
 
