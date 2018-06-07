@@ -23,7 +23,7 @@ def dialog(name=None):
             answer = update.message
             continue
 
-        if answer.text.startswith('/next') or answer.text.startswith('/get') or answer.text.lower.startswith('да'):
+        if answer.text.startswith('/next') or answer.text.startswith('/get') or answer.text.lower().startswith('да'):
             print('start get')
             try:
                 picture = next(image)
