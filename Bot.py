@@ -84,7 +84,8 @@ class MyBot:
                 self.handlers[chat_id] = self.admin_generator(name)
             else:
                 self.handlers[chat_id] = self.generator(name)
-                other_users.append(user)
+                if other_users is not None:
+                    other_users.append(user)
             answer = next(self.handlers[chat_id])
         # отправляем полученный ответ пользователю
         answer.send(bot, chat_id)
