@@ -41,9 +41,9 @@ class MyBot:
         if user in admin_usernames and user in other_users:
             other_users.remove(user)
             self.handlers.pop(chat_id, None)
-        if str(update.message.text).startswith('/addadmin') and int(chat_id) == my_id:
+        if str(update.message.text).startswith('/add_admin') and int(chat_id) == my_id:
             admin_usernames.extend(str(update.message.text).split()[1:])
-        if str(update.message.text).startswith('/deladmin') and int(chat_id) == my_id:
+        if str(update.message.text).startswith('/del_admin') and int(chat_id) == my_id:
             try:
                 admin_usernames.remove((update.message.text).split()[-1])
             except:

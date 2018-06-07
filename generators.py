@@ -1,3 +1,5 @@
+import random
+
 from Message import Message, PhotoMessage
 from PIL import Image
 
@@ -27,7 +29,7 @@ def dialog(name=None):
                 picture = next(image)
             except Exception as e:
                 print('error start', e, e.args, 'error end')
-                picture = Message('произошла какая-то ошибка, сейчас разберёмся)')
+                picture = Message('Теперь все распространенные способы завязывания вам известны. Остальное, дело ваших рук и фантазии!)', 'Пиши да, если хочешь ещё раз')
                 image = MyImage()
                 # picture = next(image)
             update = yield picture
@@ -44,7 +46,9 @@ def dialog(name=None):
 def MyImage():
     with open('Images/count') as r:
         count = int(r.read())
-    for i in range(count):
+    l = list(range(count))
+    random.shuffle(l)
+    for i in l:
         pic = open(str('Images/' + str(i) + '.jpg'), 'rb')
         # try:
         #     with open(str('Images/' + str(i) + '.jpg')) as im:
@@ -68,7 +72,7 @@ def adimin_bot(name=None):
             answer = update.message
             continue
 
-        if answer.text.startswith('/like user'):
+        if answer.text.startswith('/like_user'):
             update = yield from dialog(name)
             answer = update.message
             continue
