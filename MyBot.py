@@ -34,7 +34,7 @@ class MyBot:
         self.updater.idle()
 
     def handle_message(self, bot: telegram.Bot, update: telegram.Update):
-        print(update)
+        # print(update)
         user = update.message['chat']['username']
         print(user)
         chat_id = int(update.message.chat_id)
