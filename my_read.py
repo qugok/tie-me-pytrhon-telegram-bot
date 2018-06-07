@@ -8,9 +8,9 @@ def add_users(*args):
         old_users = f.read().split()
     print(old_users)
     print(list(args))
-    print('\n'.format(*old_users, *args))
+    print('\n'.join(*old_users, *args))
     with open('user', 'w') as f:
-        f.write('\n'.format(*old_users, *args))
+        f.write('\n'.join(*old_users, *args))
 
 # def read_message(message_name: str):
 #     with open('messages/' + message_name, encoding='utf-8') as f:
