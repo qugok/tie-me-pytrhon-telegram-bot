@@ -21,6 +21,7 @@ def split(message: str):
 class Message:
     def __init__(self, *texts, **options):
         self.texts = texts
+        self.prefix = ''
         if 'reply_markup' not in options:
             options['reply_markup'] = ReplyKeyboardRemove()
         if 'prefix' in options:
