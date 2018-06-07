@@ -59,6 +59,7 @@ class MyBot:
             try:
                 answer = self.handlers[chat_id].send(update)
             except StopIteration:
+                print('stop iteration')
                 del self.handlers[chat_id]
                 return self.handle_message(bot, update)
         else:
