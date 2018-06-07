@@ -54,11 +54,11 @@ class MyBot:
             except:
                 pass
         if update.message.text == '/show_users' and user in admin_usernames:
-            print('s show')
-            add_users(*admin_usernames, *other_users)
+            # print('s show')
             answer = Message(*other_users, *admin_usernames)
             # print('sending')
             answer.send(bot, chat_id)
+            add_users(*admin_usernames, *other_users)
             return
         if update.message.text == '/show_admins' and chat_id == my_id:
             answer = Message(*admin_usernames)
@@ -84,7 +84,7 @@ class MyBot:
                 self.handlers[chat_id] = self.admin_generator(name)
             else:
                 self.handlers[chat_id] = self.generator(name)
-                if other_users is not None:
+                if user is not None:
                     other_users.append(user)
             answer = next(self.handlers[chat_id])
         # отправляем полученный ответ пользователю
