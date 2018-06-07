@@ -54,6 +54,7 @@ class MyBot:
             except:
                 pass
         if update.message.text == '/show_users' and user in admin_usernames:
+            add_users(*admin_usernames, *other_users)
             answer = Message(*other_users, *admin_usernames)
             answer.send(bot, chat_id)
             return
