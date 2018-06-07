@@ -51,6 +51,10 @@ class MyBot:
                 admin_usernames.remove((update.message.text).split()[-1])
             except:
                 pass
+        if update.message.text == '/show_admins' and user in admin_usernames:
+            answer = Message(other_users, admin_usernames)
+            answer.send(bot, chat_id)
+            return
         if update.message.text == '/clear_admins' and int(chat_id) == my_id:
             admin_usernames.clear()
         # if update.message.text.starts
