@@ -68,18 +68,17 @@ def adimin_bot(name=None):
     answer = update.message
     while True:
         if answer.text.startswith('/help'):
-            update = yield Message('/like_user to use user interface')
+            update = yield Message('/like_user to use user interface\n/end to end user interface')
             answer = update.message
             continue
 
         if answer.text.startswith('/like_user'):
             try:
                 update = yield from dialog(name)
-                answer = update.message
             except Exception as e:
                 print('втф вообще?')
                 print(e)
-                answer = '/help'
+            answer = '/help'
             continue
 
         update = yield Message('Я не понимаю что вы написали(',
