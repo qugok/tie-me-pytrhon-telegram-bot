@@ -1,7 +1,7 @@
 import collections
 
 from telegram.ext import Updater, MessageHandler, Filters
-
+from my_read import add_users
 from Message import *
 
 admin_usernames = []
@@ -33,6 +33,7 @@ class MyBot:
         # Останавливаем бота, если были нажаты Ctrl + C
         self.updater.idle()
         print('start end')
+        add_users(*admin_usernames, *other_users)
 
     def handle_message(self, bot: telegram.Bot, update: telegram.Update):
         # print(update)

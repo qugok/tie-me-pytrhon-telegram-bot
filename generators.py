@@ -24,11 +24,11 @@ def dialog(name=None):
             continue
 
         if answer.text.startswith('/next') or answer.text.startswith('/get') or answer.text.lower().startswith('да'):
-            print('start get')
+            # print('start get')
             try:
                 picture = next(image)
             except Exception as e:
-                print('error start', e, e.args, 'error end')
+                # print('error start', e, e.args, 'error end')
                 picture = Message('Теперь все распространенные способы завязывания вам известны. Остальное, дело ваших рук и фантазии!)', 'Пиши да, если хочешь ещё раз')
                 image = MyImage()
                 # picture = next(image)
