@@ -79,7 +79,7 @@ def adimin_bot(name=None):
             except Exception as e:
                 print('втф вообще?')
                 print(e)
-            answer = '/help'
+            answer.text = '/help'
             continue
 
         update = yield Message('Я не понимаю что вы написали(',
