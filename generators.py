@@ -102,7 +102,7 @@ def adimin_bot(name=None):
                 update = yield from dialog(name)
                 # print(update)
             except Exception as e:
-                print('втф вообще?')
+                print('втф ?')
                 print(e)
             answer.text = '/help'
             continue
