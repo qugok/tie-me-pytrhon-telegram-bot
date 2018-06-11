@@ -76,7 +76,7 @@ def addImage():
     if text == '/cancel':
         update = yield Message('закончили')
         return update
-    if text == '/clean':
+    if text == '/clear':
         text = ''
     with open('Images/count') as r:
         count = int(r.read())
