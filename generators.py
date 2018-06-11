@@ -71,7 +71,6 @@ def addImage():
     print('cycle end')
     photo = update.message.photo[0].get_file()
     print('photo get')
-    file = photo.getFile()
     update = yield Message('отправьте текст для картинки\n/clear если без подписи')
     text = update.message.text
     if text == '/cancel':
