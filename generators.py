@@ -60,14 +60,17 @@ def MyImage():
         except:
             pass
 
-def addImege():
+def addImage():
     update = yield Message('отправьте картинку, которую хотите добавить\n/cancel чтобы отменить')
-    while update.message.photo is None:
+    while 'photo' not in update.message.__dict__:
         if update.message.text.startswith('/cancel'):
             update = yield Message('закончили')
             return update
+        print('cycle')
         update = yield Message('вам нужно отправить картинку', 'отправьте картинку, которую хотите добавить')
+    print('cycle end')
     photo = update.message.photo[0].get_file()
+    print('photo get')
     file = photo.getFile()
     update = yield Message('отправьте текст для картинки\n/clear если без подписи')
     text = update.message.text
@@ -109,7 +112,7 @@ def adimin_bot(name=None):
 
         if answer.text.startswith('/add'):
             try:
-                update = yield from addImege()
+                update = yield from addImage()
                 answer = update.message
                 continue
             except Exception as e:
