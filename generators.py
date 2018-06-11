@@ -1,5 +1,7 @@
 import random
 
+import telegram
+
 from Message import Message, PhotoMessage
 from PIL import Image
 
@@ -50,25 +52,48 @@ def MyImage():
     random.shuffle(l)
     for i in l:
         pic = open(str('Images/' + str(i) + '.jpg'), 'rb')
-        # try:
-        #     with open(str('Images/' + str(i) + '.jpg')) as im:
-        #         try:
-        #             pic = im.read()
-        #         except Exception as e:
-        #             print(1, e)
-        # except Exception as e:
-        #     print(2, e)
-        # # print(pic)
-        yield PhotoMessage(photo=pic)
+        with open(str('Images/' + str(i)), 'r') as r:
+            text = r.read()
+        yield PhotoMessage(text, photo=pic)
+        try:
+            pic.close()
+        except:
+            pass
 
-# def addImege(update: T)
+def addImege():
+    update = yield Message('отправьте картинку, которую хотите добавить\n/cancel чтобы отменить')
+    while update.message.photo is None:
+        if update.message.text.startswith('/cancel'):
+            update = yield Message('закончили')
+            return update
+        update = yield Message('вам нужно отправить картинку', 'отправьте картинку, которую хотите добавить')
+    photo = update.message.photo[0].get_file()
+    file = photo.getFile()
+    update = yield Message('отправьте текст для картинки\n/clear если без подписи')
+    text = update.message.text
+    if text == '/cancel':
+        update = yield Message('закончили')
+        return update
+    if text == '/clean':
+        text = ''
+    with open('Images/count') as r:
+        count = int(r.read())
+    pic = open(str('Images/' + str(count) + '.jpg'), 'xb')
+    with open(str('Images/' + str(count)), 'x') as r:
+        r.write(text)
+    photo.download(out=pic)
+    pic.close()
+    with open('Images/count', 'w') as r:
+        r.write(str(count + 1))
+    update = yield Message('Done')
+    return update
 
 def adimin_bot(name=None):
     update = yield Message('hello Admin {}!'.format(name))
     answer = update.message
     while True:
         if answer.text.startswith('/help'):
-            update = yield Message('/like_user to use user interface\n/end to end user interface\n/show_users to see users')
+            update = yield Message('/like_user to use user interface\n/end to end user interface\n/show_users to see users\n/add to add image')
             answer = update.message
             continue
 
@@ -81,6 +106,14 @@ def adimin_bot(name=None):
                 print(e)
             answer.text = '/help'
             continue
+
+        if answer.text.startswith('/add'):
+            try:
+                update = yield from addImege()
+                answer = update.message
+                continue
+            except Exception as e:
+                print(e)
 
         update = yield Message('Я не понимаю что вы написали(',
                                         'Попробуйте подсказку\nТам всё, что я умею\nВы можете её вызвать командой /help\nУдачи!)')
