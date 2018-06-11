@@ -62,7 +62,7 @@ def MyImage():
 
 def addImage():
     update = yield Message('отправьте картинку, которую хотите добавить\n/cancel чтобы отменить')
-    while 'photo' not in update.message.__dict__:
+    while 'photo' not in update.message.__dict__ or len(update.message.photo) == 0:
         if update.message.text.startswith('/cancel'):
             update = yield Message('закончили')
             return update

@@ -13,7 +13,7 @@ class MyBot:
 
     def __init__(self, token, user_generator, admin_generator=None):
         self.updater = Updater(token=token)  # заводим апдейтера
-        text_handler = MessageHandler(Filters.text | Filters.command,
+        text_handler = MessageHandler(Filters.text | Filters.command | Filters.photo,
                                       self.handle_message)
         self.updater.dispatcher.add_handler(
             text_handler)  # ставим обработчик всех текстовых сообщений
