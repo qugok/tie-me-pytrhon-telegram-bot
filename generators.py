@@ -45,7 +45,7 @@ def MyImage():
     with open('Images/count') as r:
         count = int(r.read())
     l = list(range(count))
-    random.shuffle(l)
+    # random.shuffle(l)
     for i in l:
         pic = open(str('Images/' + str(i) + '.jpg'), 'rb')
         with open(str('Images/' + str(i)), 'r') as r:
