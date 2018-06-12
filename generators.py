@@ -1,9 +1,6 @@
 import random
 
-import telegram
-
 from Message import Message, PhotoMessage
-from PIL import Image
 
 def dialog(name=None):
     if name is not None:
@@ -16,12 +13,12 @@ def dialog(name=None):
         update = yield Message('Как мне тебя называть?')
         answer = update.message
         name = answer.text.rstrip(".!").capitalize()
-    update = yield Message(r'Привет, я Александр Александрович В и я очень люблю галстуки! Меня создали для того, что бы помочь тебе выглядеть стильно и изящно с помощью твоего красивого галстука! Хочешь увидеть варианты? Пиши да или /next или /get, и я пришлю тебе картинку и инструкцию, как это сделать.')
+    update = yield Message(r'Привет, я Александр Александрович В и я очень люблю платки и шарфики! Меня создали для того, что бы помочь тебе выглядеть стильно и изящно с помощью твоего красивого платочка/шарфика! Хочешь увидеть варианты? Пиши да или /next или /get, и я пришлю тебе картинку и инструкцию, как это сделать.')
     image = MyImage()
     answer = update.message
     while True:
         if answer.text.startswith('/help'):
-            update = yield Message('Меня создали для того, что бы помочь тебе выглядеть стильно и изящно с помощью твоего красивого галстука! Хочешь увидеть варианты? Пиши да или /next или /get, и я пришлю тебе картинку и инструкцию, как это сделать.')
+            update = yield Message('Меня создали для того, что бы помочь тебе выглядеть стильно и изящно с помощью твоего красивого платочка/шарфика! Хочешь увидеть варианты? Пиши да или /next или /get, и я пришлю тебе картинку и инструкцию, как это сделать.')
             answer = update.message
             continue
 
@@ -31,7 +28,7 @@ def dialog(name=None):
                 picture = next(image)
             except Exception as e:
                 # print('error start', e, e.args, 'error end')
-                picture = Message('Теперь все распространенные способы завязывания вам известны. Остальное, дело ваших рук и фантазии!)', 'Пиши да, если хочешь ещё раз')
+                picture = Message('Теперь все распространенные способы привязывания вам известны. Остальное, дело ваших рук и фантазии!)', 'Пиши да или /next или /get, если хочешь ещё раз')
                 image = MyImage()
                 # picture = next(image)
             update = yield picture
@@ -110,6 +107,9 @@ def adimin_bot(name=None):
             continue
 
         if answer.text.startswith('/add'):
+            update = yield Message("sorry it don't works")
+            answer = update.message
+            continue
             try:
                 update = yield from addImage()
                 answer = update.message
