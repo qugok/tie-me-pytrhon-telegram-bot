@@ -1,5 +1,6 @@
 import collections
 
+import telegram
 from telegram.ext import Updater, MessageHandler, Filters
 from my_read import add_users
 from Message import *
@@ -15,6 +16,7 @@ class MyBot:
         self.updater = Updater(token=token)  # заводим апдейтера
         text_handler = MessageHandler(Filters.text | Filters.command | Filters.photo,
                                       self.handle_message)
+
         self.updater.dispatcher.add_handler(
             text_handler)  # ставим обработчик всех текстовых сообщений
         if admin_generator is not None:
@@ -36,7 +38,7 @@ class MyBot:
         add_users(*admin_usernames, *other_users)
 
     def handle_message(self, bot: telegram.Bot, update: telegram.Update):
-        print(update)
+        # print(update)
         user = update.message['chat']['username']
         chat_id = int(update.message.chat_id)
         if user not in admin_usernames and user not in other_users:
