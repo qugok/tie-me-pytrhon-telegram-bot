@@ -27,7 +27,6 @@ def dialog(name=None):
             try:
                 picture = next(image)
             except Exception as e:
-                # print('error start', e, e.args, 'error end')
                 picture = Message('Теперь все распространенные способы привязывания вам известны. Остальное, дело ваших рук и фантазии!)', 'Пиши да или /next или /get, если хочешь ещё раз')
                 image = MyImage()
                 # picture = next(image)
