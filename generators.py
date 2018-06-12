@@ -14,7 +14,8 @@ def dialog(name=None):
         answer = update.message
         name = answer.text.rstrip(".!").capitalize()
     update = yield Message(r'Привет, я Александр Александрович В и я очень люблю платки и шарфики! Меня создали для того, что бы помочь тебе выглядеть стильно и изящно с помощью твоего красивого платочка/шарфика! Хочешь увидеть варианты? Пиши да или /next или /get, и я пришлю тебе картинку и инструкцию, как это сделать.')
-    image = MyImage()
+    # image = MyImage()
+    image = MyLinkImage()
     answer = update.message
     while True:
         if answer.text.startswith('/help'):
@@ -41,6 +42,7 @@ def dialog(name=None):
         answer = update.message
 
 
+
 def MyImage():
     with open('Images/count') as r:
         count = int(r.read())
@@ -55,6 +57,19 @@ def MyImage():
             pic.close()
         except:
             pass
+
+def MyLinkImage():
+    with open('Images/count') as r:
+        count = int(r.read())
+    l = list(range(count))
+    # random.shuffle(l)
+    for i in l:
+        with open(str('Images/' + str(i)) + 'link', 'r') as r:
+            link = r.read()
+        with open(str('Images/' + str(i)), 'r') as r:
+            text = r.read()
+        yield PhotoMessage(text, photo=link)
+
 
 def addImage():
     update = yield Message('отправьте картинку, которую хотите добавить\n/cancel чтобы отменить')
