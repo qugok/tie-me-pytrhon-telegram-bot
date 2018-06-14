@@ -14,8 +14,8 @@ def dialog(name=None):
         answer = update.message
         name = answer.text.rstrip(".!").capitalize()
     update = yield Message(r'Привет, я Александр Александрович В и я очень люблю платки и шарфики! Меня создали для того, что бы помочь тебе выглядеть стильно и изящно с помощью твоего красивого платочка/шарфика! Хочешь увидеть варианты? Пиши да или /next или /get, и я пришлю тебе картинку и инструкцию, как это сделать.')
-    # image = MyImage()
-    image = MyLinkImage()
+    image = MyImage()
+    # image = MyLinkImage()
     answer = update.message
     while True:
         if answer.text.startswith('/help'):
