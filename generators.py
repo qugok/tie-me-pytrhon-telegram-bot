@@ -76,7 +76,11 @@ def openImage():
     name = update.message.text
     try:
         pic = open(str('Images/' + str(name)), 'rb')
-        update = yield PhotoMessage('пытаюсь отправить фото','фото', photo=pic)
+        update = yield PhotoMessage('пытаюсь отправить фото', 'фото', photo=pic)
+        try:
+            pic.close()
+        except:
+            pass
         return update
     except:
         update = yield Message('что-то пошло не так')
@@ -142,7 +146,7 @@ def adimin_bot(name=None):
             except Exception as e:
                 print('втф ?')
                 print(e)
-            answer.text = '/help'
+            answer = update.message
             continue
 
         if answer.text.startswith('/add'):
