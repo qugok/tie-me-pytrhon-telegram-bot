@@ -120,7 +120,7 @@ def adimin_bot(name=None):
             update = yield Message('/like_user to use user interface\n'
                                    '/end to end user interface\n'
                                    '/show_users to see users\n'
-                                   '/add to add image'
+                                   '/add to add image\n'
                                    '/open to open image')
             answer = update.message
             continue
