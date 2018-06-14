@@ -86,6 +86,7 @@ def openImage():
         update = yield Message('что-то пошло не так')
         return update
 
+
 def addImage():
     update = yield Message('отправьте картинку, которую хотите добавить\n/cancel чтобы отменить')
     while 'photo' not in update.message.__dict__ or len(update.message.photo) == 0:
