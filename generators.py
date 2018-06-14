@@ -52,7 +52,7 @@ def MyImage():
         pic = open(str('Images/' + str(i) + '.jpg'), 'rb')
         with open(str('Images/' + str(i)), 'r') as r:
             text = r.read()
-        yield PhotoMessage(text, photo=pic)
+        yield PhotoMessage(text, photo=pic, reverse=True)
         try:
             pic.close()
         except:
@@ -76,7 +76,7 @@ def openImage():
     name = update.message.text
     try:
         pic = open(str('Images/' + str(name)), 'rb')
-        update = yield PhotoMessage('пытаюсь отправить фото', 'фото', photo=pic)
+        update = yield PhotoMessage('пытаюсь отправить фото', 'фото\n/open', photo=pic)
         try:
             pic.close()
         except:

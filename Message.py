@@ -42,6 +42,8 @@ class Message:
         texts = []
         for i in self.texts:
             texts.extend(split(i))
+        # if self.reverse:
+        #     texts.reverse()
         self.texts = texts
 
     def __str__(self):
@@ -76,19 +78,38 @@ class PhotoMessage(Message):
         if 'photo' in options:
             self.photo = options['photo']
             options.pop('photo')
+        self.reverse = False
+        if 'reverse' in options:
+            self.reverse = options['reverse']
+            options.pop('reverse')
         super().__init__(*texts, **options)
 
     def send(self, bot: telegram.Bot, chat_id):
         self.prepare()
-        for text in self.texts[:-1]:
+        if self.reverse:
+            try:
+                if len(self.texts) > 0:
+                    bot.sendPhoto(chat_id=chat_id, photo=self.photo,
+                                  caption=self.texts[0])
+                else:
+                    bot.sendPhoto(chat_id=chat_id, photo=self.photo)
+            except:
+                if len(self.texts) > 0:
+                    bot.sendMessage(chat_id=chat_id, text=self.texts[0])
+            self.send_text(bot, chat_id, self.texts[1:])
+        else:
+            self.send_text(bot, chat_id, self.texts[:-1])
+            try:
+                if len(self.texts) > 0:
+                    bot.sendPhoto(chat_id=chat_id, photo=self.photo,
+                                  caption=self.texts[-1])
+                else:
+                    bot.sendPhoto(chat_id=chat_id, photo=self.photo)
+            except:
+                if len(self.texts) > 0:
+                    bot.sendMessage(chat_id=chat_id, text=self.texts[-1])
+
+    def send_text(self, bot: telegram.Bot, chat_id, texts):
+        for text in texts:
             if len(text.strip()) != 0:
                 bot.sendMessage(chat_id=chat_id, text=text, **self.options)
-        try:
-            if len(self.texts) > 0:
-                bot.sendPhoto(chat_id=chat_id, photo=self.photo,
-                              caption=self.texts[-1])
-            else:
-                bot.sendPhoto(chat_id=chat_id, photo=self.photo)
-        except:
-            if len(self.texts) > 0:
-                bot.sendMessage(chat_id=chat_id, text=self.texts[-1])
