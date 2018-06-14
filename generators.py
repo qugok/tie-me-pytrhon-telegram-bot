@@ -51,8 +51,8 @@ def MyImage():
     for i in l:
         pic = open(str('Images/' + str(i) + '.jpg'), 'rb')
         with open(str('Images/' + str(i)), 'r') as r:
-            text = r.read()
-        yield PhotoMessage(text, photo=pic, reverse=True)
+            texts = r.read().split()
+        yield PhotoMessage(*texts, photo=pic, reverse=True)
         try:
             pic.close()
         except:
