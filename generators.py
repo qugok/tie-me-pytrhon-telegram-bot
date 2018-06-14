@@ -51,7 +51,7 @@ def MyImage():
     for i in l:
         pic = open(str('Images/' + str(i) + '.jpg'), 'rb')
         with open(str('Images/' + str(i)), 'r') as r:
-            texts = r.read().split()
+            texts = r.read().split('\n')
         yield PhotoMessage(*texts, photo=pic, reverse=True)
         try:
             pic.close()
