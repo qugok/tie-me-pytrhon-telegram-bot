@@ -71,6 +71,17 @@ def MyLinkImage():
         yield PhotoMessage(text, photo=link)
 
 
+def openImage():
+    update = yield Message('Введите названиие файла')
+    name = update.message.text
+    try:
+        pic = open(str('Images/' + str(name)), 'rb')
+        update = yield PhotoMessage('пытаюсь отправить фото','фото', photo=pic)
+        return update
+    except:
+        update = yield Message('что-то пошло не так')
+        return update
+
 def addImage():
     update = yield Message('отправьте картинку, которую хотите добавить\n/cancel чтобы отменить')
     while 'photo' not in update.message.__dict__ or len(update.message.photo) == 0:
@@ -106,13 +117,27 @@ def adimin_bot(name=None):
     answer = update.message
     while True:
         if answer.text.startswith('/help'):
-            update = yield Message('/like_user to use user interface\n/end to end user interface\n/show_users to see users\n/add to add image')
+            update = yield Message('/like_user to use user interface\n'
+                                   '/end to end user interface\n'
+                                   '/show_users to see users\n'
+                                   '/add to add image'
+                                   '/open to open image')
             answer = update.message
             continue
 
         if answer.text.startswith('/like_user'):
             try:
                 update = yield from dialog(name)
+                # print(update)
+            except Exception as e:
+                print('втф ?')
+                print(e)
+            answer.text = '/help'
+            continue
+
+        if answer.text.startswith('/open'):
+            try:
+                update = yield from openImage()
                 # print(update)
             except Exception as e:
                 print('втф ?')
