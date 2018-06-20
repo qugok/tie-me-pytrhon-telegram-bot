@@ -54,7 +54,8 @@ def MyImage():
         pic = open(str('Images/' + str(i) + '.jpg'), 'rb')
         with open(str('Images/' + str(i)), 'r') as r:
             texts = r.read().split('\n')
-        texts.append('Пиши /next, если хочешь ещё раз')
+        if i != l[-1]:
+            texts.append('Пиши /next, если хочешь ещё сопсоб')
         yield PhotoMessage(*texts, photo=pic, reverse=True)
         try:
             pic.close()
