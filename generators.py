@@ -30,7 +30,7 @@ def dialog(name=None):
             try:
                 picture = next(image)
             except Exception as e:
-                picture = Message('Теперь все распространенные способы привязывания вам известны. Остальное, дело ваших рук и фантазии!)', 'Пиши да или /next или /get, если хочешь ещё раз')
+                picture = Message('Теперь все распространенные способы привязывания вам известны. Остальное, дело ваших рук и фантазии!)', 'Пиши /next, если хочешь ещё раз')
                 image = MyImage()
                 # picture = next(image)
             update = yield picture
@@ -54,6 +54,7 @@ def MyImage():
         pic = open(str('Images/' + str(i) + '.jpg'), 'rb')
         with open(str('Images/' + str(i)), 'r') as r:
             texts = r.read().split('\n')
+        texts.append('Пиши /next, если хочешь ещё раз')
         yield PhotoMessage(*texts, photo=pic, reverse=True)
         try:
             pic.close()
