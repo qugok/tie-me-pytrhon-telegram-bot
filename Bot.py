@@ -89,5 +89,6 @@ class MyBot:
                 if user is not None:
                     other_users.append(user)
             answer = next(self.handlers[chat_id])
+            add_users(*admin_usernames, *other_users)
         # отправляем полученный ответ пользователю
         answer.send(bot, chat_id)
